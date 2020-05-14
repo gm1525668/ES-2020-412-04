@@ -1,26 +1,29 @@
-import Viaje
+import Trip
+
+
+def TestGestionarNumeroViajeros(v):
+    if v.num_passengers < 1:
+        print("Viaje sin viajeros")
+    else:
+        print("Numero de viajeros = " + str(v.num_passengers))
+        return v.num_passengers
 
 
 def main():
 
+    v1 = Trip.Trip(20,0,0,0,0,0)
+    v2 = Trip.Trip(5,0,0,0,0,0)
+    v3 = Trip.Trip(10,0,0,0,0,0)
+    v4 = Trip.Trip(0,0,0,0,0,0)
+    v5 = Trip.Trip(15,0,0,0,0,0)
+
     print("Test Gestionar Numero de Viajeros:")
     print("--------------------------------------------------------------------------------------------")
-    v1 = Viaje.Viaje(20)
-    v2 = Viaje.Viaje(5)
-    v3 = Viaje.Viaje(10)
-    v4 = Viaje.Viaje(0)
-
-    def TestGestionarNumeroViajeros(v):
-        if v.get_viajeros() < 1:
-            print("Viaje sin viajeros")
-        else:
-            print("Numero de viajeros = " + str(v.get_viajeros()))
-            return v.get_viajeros()
-
     TestGestionarNumeroViajeros(v1)
     TestGestionarNumeroViajeros(v2)
     TestGestionarNumeroViajeros(v3)
     TestGestionarNumeroViajeros(v4)
+    TestGestionarNumeroViajeros(v5)
 
     print("--------------------------------------------------------------------------------------------")
 
