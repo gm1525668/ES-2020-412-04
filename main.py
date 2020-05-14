@@ -1,5 +1,5 @@
 def main():
-    print("skere")
+    print("ABC")
 
 if __name__ == "__main__":
     main()
