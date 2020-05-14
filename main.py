@@ -20,7 +20,7 @@ def main():
     v2 = Trip.Trip(5,0,['Berlín', 'Roma', 'Londres', 'Madrid'],0,0,0)
     v3 = Trip.Trip(10,0,['Atenas', 'Ibiza'],0,0,0)
     v4 = Trip.Trip(0,0,[],0,0,0)
-    v5 = Trip.Trip(15,0,['Nueva York'],0,0,0)
+    v5 = Trip.Trip(15,0,['Ibiza'],0,0,0)
 
     print("Test Gestionar Numero de Viajeros:")
     print("--------------------------------------------------------------------------------------------")
@@ -35,9 +35,11 @@ def main():
     print("Test Gestionar Varios Destinos:")
     print("--------------------------------------------------------------------------------------------")
     TestGestionarVariosDestinos(v1)
-    TestGestionarVariosDestinos(v2)
-    TestGestionarVariosDestinos(v3)
+    v1.add_destination('Atenas')
+    TestGestionarVariosDestinos(v1)
     TestGestionarVariosDestinos(v4)
+    TestGestionarVariosDestinos(v5)
+    v5.remv_destination('NY')
     TestGestionarVariosDestinos(v5)
     print("--------------------------------------------------------------------------------------------")
 

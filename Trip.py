@@ -13,3 +13,13 @@ class Trip:
         self.start_date = start_date
         self.finish_date = finish_date
         self.price = price
+
+    def add_destination(self, d):
+        self.destination.append(d)
+
+    def remv_destination(self, d):
+        if d not in self.destination:
+            print('Destino no valido para eliminar')
+        else:
+            self.destination.remove(d)
+
