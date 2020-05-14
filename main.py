@@ -2,6 +2,9 @@ import Viaje
 
 
 def main():
+
+    print("Test Gestionar Numero de Viajeros:")
+    print("--------------------------------------------------------------------------------------------")
     v1 = Viaje.Viaje(20)
     v2 = Viaje.Viaje(5)
     v3 = Viaje.Viaje(10)
@@ -18,6 +21,8 @@ def main():
     TestGestionarNumeroViajeros(v2)
     TestGestionarNumeroViajeros(v3)
     TestGestionarNumeroViajeros(v4)
+
+    print("--------------------------------------------------------------------------------------------")
 
 
 if __name__ == "__main__":
