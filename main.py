@@ -32,7 +32,7 @@ def main():
 
     print("--------------------------------------------------------------------------------------------")
 
-    print("Test Gestionar Numero de Viajeros:")
+    print("Test Gestionar Varios Destinos:")
     print("--------------------------------------------------------------------------------------------")
     TestGestionarVariosDestinos(v1)
     TestGestionarVariosDestinos(v2)
