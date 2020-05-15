@@ -12,10 +12,3 @@ class Hotel:
         self.num_rooms = num_rooms
         self.days = days
 
-
-# list_hotels = Lista de hoteles
-
-class Hotels:
-
-    def __init__(self, list_hotels):
-        self.list_hotels = list_hotels

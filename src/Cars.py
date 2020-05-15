@@ -10,8 +10,3 @@ class Car:
         self.place = place
         self.days = days
 
-
-class Cars:
-
-    def __init__(self, list_cars):
-        self.list_cars = list_cars

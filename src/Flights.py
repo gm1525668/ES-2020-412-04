@@ -8,8 +8,3 @@ class Flight:
         self.destination = destination
         self.num_passengers = num_passengers
 
-
-class Flights:
-
-    def __init__(self, list_flights):
-        self.list_flights = list_flights
