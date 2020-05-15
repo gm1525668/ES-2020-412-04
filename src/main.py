@@ -1,4 +1,4 @@
-import Trip
+from src import Trip
 
 
 def TestGestionarNumeroViajeros(v):
@@ -16,11 +16,11 @@ def TestGestionarVariosDestinos(v):
 
 def main():
 
-    v1 = Trip.Trip(20,0,['Paris', 'Ibiza', 'Roma'],0,0,0)
-    v2 = Trip.Trip(5,0,['Berlín', 'Roma', 'Londres', 'Madrid'],0,0,0)
-    v3 = Trip.Trip(10,0,['Atenas', 'Ibiza'],0,0,0)
-    v4 = Trip.Trip(0,0,[],0,0,0)
-    v5 = Trip.Trip(15,0,['Ibiza'],0,0,0)
+    v1 = Trip.Trip(20, 0, ['Paris', 'Ibiza', 'Roma'], 0, 0, 0)
+    v2 = Trip.Trip(5, 0, ['Berlín', 'Roma', 'Londres', 'Madrid'], 0, 0, 0)
+    v3 = Trip.Trip(10, 0, ['Atenas', 'Ibiza'], 0, 0, 0)
+    v4 = Trip.Trip(0, 0, [], 0, 0, 0)
+    v5 = Trip.Trip(15, 0, ['Ibiza'], 0, 0, 0)
 
     print("Test Gestionar Numero de Viajeros:")
     print("--------------------------------------------------------------------------------------------")
