@@ -1,4 +1,4 @@
-class Flights:
+class Flight:
 
     # id_flight = Identificador vuelo
     # destination = Destino
@@ -7,3 +7,9 @@ class Flights:
         self.id_flight = id_flight
         self.destination = destination
         self.num_passengers = num_passengers
+
+
+class Flights:
+
+    def __init__(self, list_flights):
+        self.list_flights = list_flights
