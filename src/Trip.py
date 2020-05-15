@@ -15,7 +15,12 @@ class Trip:
         self.price = price
 
     def add_destination(self, d):
-        self.destination.append(d)
+        if d not in self.destination:
+            self.destination.append(d)
+        else:
+            print('Destino ya seleccionado')
+
+
 
     def remv_destination(self, d):
         if d not in self.destination:
