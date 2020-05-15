@@ -1,5 +1,6 @@
 from . import PaymentData
 from . import Trip
+from . import Flights
 from . import Bank
 
 
@@ -24,3 +25,9 @@ class User:
             return True
         else:
             return False
+
+    def Confirmar_Vol(self, flight : Flights):
+        if flight.num_passengers != 'None' or flight.destination != 'None' or flight.id_flight != 'None':
+            return False
+        else:
+            return True

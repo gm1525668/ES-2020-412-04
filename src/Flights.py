@@ -7,4 +7,3 @@ class Flight:
         self.id_flight = id_flight
         self.destination = destination
         self.num_passengers = num_passengers
-
