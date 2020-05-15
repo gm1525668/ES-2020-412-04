@@ -1,4 +1,4 @@
-class Hotels:
+class Hotel:
 
     # id_hotel = Identificador hotel
     # name = Nombre
@@ -11,3 +11,11 @@ class Hotels:
         self.num_guests = num_guests
         self.num_rooms = num_rooms
         self.days = days
+
+
+# list_hotels = Lista de hoteles
+
+class Hotels:
+
+    def __inti__(self, list_hotels):
+        self.list_hotels = list_hotels
