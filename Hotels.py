@@ -17,5 +17,5 @@ class Hotel:
 
 class Hotels:
 
-    def __inti__(self, list_hotels):
+    def __init__(self, list_hotels):
         self.list_hotels = list_hotels
