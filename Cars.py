@@ -1,4 +1,4 @@
-class Cars:
+class Car:
 
     # id_car = Identificador coche
     # brand = Marca
@@ -9,3 +9,9 @@ class Cars:
         self.brand = brand
         self.place = place
         self.days = days
+
+
+class Cars:
+
+    def __init__(self, list_cars):
+        self.list_cars = list_cars
