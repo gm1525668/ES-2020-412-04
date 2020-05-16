@@ -9,4 +9,3 @@ class Cars:
         self.brand = brand
         self.place = place
         self.days = days
-

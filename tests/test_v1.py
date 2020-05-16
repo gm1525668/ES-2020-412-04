@@ -10,17 +10,9 @@ from src.User import Trip
         self.assertTrue(usu.pay(Trip))"""
 
 
-@pytest.mark.parametrize('n_pas, result',
-                         [
-                             (2, 2),
-                             (3, 3),
-                             (4, 4),
-                             (52, 52)
-                         ]
-                         )
+@pytest.mark.parametrize('n_pas, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
 def test_num_pas(n_pas, result):
     trip = Trip.Trip(n_pas, 'BCN', 'LDN', 0, 0, 100)
-
     assert trip.num_passengers == result
 
 
@@ -29,4 +21,6 @@ def test_no_destination():
 
     assert trip.destination == []
 
-def test_no
+
+def test_no_destination_flights():
+    return True

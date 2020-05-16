@@ -26,7 +26,7 @@ class User:
         else:
             return False
 
-    def Confirmar_Vol(self, flight : Flights):
+    def Confirmar_Vol(self, flight: Flights):
         if flight.num_passengers != 'None' or flight.destination != 'None' or flight.id_flight != 'None':
             return False
         else:
