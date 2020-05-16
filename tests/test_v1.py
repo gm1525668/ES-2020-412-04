@@ -15,9 +15,9 @@ from src.Cars import Cars
         self.assertTrue(usu.pay(Trip))"""
 
 
-@pytest.mark.parametrize('n_pas, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
-def test_num_pas(n_pas, result):
-    trip = Trip.Trip(n_pas, 'BCN', 'LDN', 0, 0, 100)
+@pytest.mark.parametrize('num_passengers, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
+def test_num_passengers(num_passengers, result):
+    trip = Trip(num_passengers, 'BCN', [], [], [], '01/05/2020', '10/05/2020', 0)
     assert trip.num_passengers == result
 
 
@@ -206,3 +206,35 @@ def test_remove_destination_calc_price():
 
     result_price = 385
     assert trip.price == result_price
+
+
+def test_confirm_pay():
+    num_passengers = 2
+
+    flight1 = Flights(1, 'BRE', num_passengers, 10)
+    flight2 = Flights(2, 'BRU', num_passengers, 20)
+    flight3 = Flights(3, 'MRS', num_passengers, 30)
+    flight4 = Flights(4, 'DUB', num_passengers, 40)
+    flight5 = Flights(5, 'LDN', num_passengers, 50)
+    flight6 = Flights(6, 'BCN', num_passengers, 60)
+
+    flights_list = [flight1, flight2, flight3, flight4, flight6]
+
+    hotel1 = Hotels(1, 'Hotel 1', num_passengers, 1, 2, 50)
+    hotel2 = Hotels(2, 'Hotel 2', num_passengers, 1, 2, 50)
+    hotel3 = Hotels(3, 'Hotel 3', num_passengers, 1, 2, 50)
+    hotel4 = Hotels(4, 'Hotel 4', num_passengers, 1, 2, 50)
+
+    hotels_list = [hotel1, hotel2, hotel3]
+
+    car1 = Cars(1, 'Honda', 'Airport', 2, 25)
+    car2 = Cars(2, 'Audi', 'Airport', 2, 25)
+    car3 = Cars(3, 'Mercedes', 'Airport', 2, 25)
+    car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
+
+    cars_list = [car1, car2, car3]
+
+    trip = Trip(num_passengers, 'BCN', flights_list, hotels_list, cars_list, '01/05/2020', '10/05/2020', 0)
+    trip.add_destination(flight5, hotel4, car4)
+    trip.calc_price()
+
