@@ -1,6 +1,7 @@
-from src.Flights import Flights
-from src.Hotels import Hotels
-from src.Cars import Cars
+from . import User
+from . import Flights
+from . import Hotels
+from . import Cars
 
 
 class Trip:
@@ -54,3 +55,10 @@ class Trip:
 
         for car in self.car_list:
             self.price += car.price
+
+    def reserve_flights(self, user: User):
+        for flight in self.flight_list:
+            if not flight.reserve_flight(user):
+                return False
+
+        return True

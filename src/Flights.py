@@ -1,3 +1,7 @@
+from . import User
+from . import Skyscanner
+
+
 class Flights:
 
     # id_flight = Identificador vuelo
@@ -9,3 +13,9 @@ class Flights:
         self.destination = destination
         self.num_passengers = num_passengers
         self.price = price
+
+    def reserve_flight(self, user: User):
+        if Skyscanner.confirm_reserve(user, self):
+            return True
+        else:
+            return False
