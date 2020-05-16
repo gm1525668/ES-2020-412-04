@@ -3,7 +3,7 @@ import unittest
 from src.User import Trip
 from src.User import User
 from src.User import PaymentData
-from src.User import Flights
+
 
 
 class TestPayment(unittest.TestCase):
