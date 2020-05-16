@@ -17,11 +17,10 @@ class User:
         self.payment_data = payment_data
 
     def pay(self, trip: Trip):
-        price = trip.price
-        self.payment_data.price = price
+        trip.calc_price()
+        self.payment_data.price = trip.price
 
-        bank = Bank()
-        if bank.do_payment(self, self.payment_data):
+        if Bank.do_payment(self, self.payment_data):
             return True
         else:
             return False
