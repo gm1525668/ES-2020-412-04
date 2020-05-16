@@ -232,6 +232,19 @@ def test_confirm_pay():
 
     assert user.pay(trip)
 
+def test_confirm_vol():
+    num_passenger = 2
+    flight1 = Flights(1, 'BRE', num_passenger, 10)
+    flight2 = Flights(2, 'BRU', num_passenger, 20)
+    flight3 = Flights(3, 'MRS', num_passenger, 20)
+    flight4 = Flights(4, 'DUB', num_passenger, 40)
+    flight5 = Flights(5, 'LDN', num_passenger, 50)
+    flight6 = Flights(6, 'BCN', num_passenger, 60)
+    flights_list = [flight1, flight2, flight3, flight4, flight5, flight6]
+    trip = Trip(num_passenger, 'BCN', flights_list, [], [], '01/05/2020', '10/05/2020', 0)
+    Confirm = trip.Confirmar_Vol(flights_list)
+    Result = True
+    assert Confirm == Result
 
 def test_reserve_flight():
     num_passengers = 2

@@ -56,6 +56,20 @@ class Trip:
         for car in self.car_list:
             self.price += car.price
 
+    def Confirmar_Vol(self, flight: Flights):
+        Confirm = 0
+        for counter, flight in enumerate(self.flight_list):
+            if flight.num_passengers != 'None' or flight.destination != 'None' or flight.id_flight != 'None' or flight.price != 'None':
+                print('No se ha podido confirmar la reserva de vuelo numero:' + counter)
+
+            else:
+                print('Confirmación Correcta')
+                Confirm += 1
+        if Confirm == len(self.flight_list):
+            return True
+        else:
+            return False
+
     def reserve_flights(self, user: User):
         for flight in self.flight_list:
             if not flight.reserve_flight(user):
