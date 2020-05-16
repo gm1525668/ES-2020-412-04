@@ -28,3 +28,5 @@ def test_no_destination():
     trip = Trip.Trip(1, 'BCN', [], 0, 0, 100)
 
     assert trip.destination == []
+
+def test_no
