@@ -239,5 +239,5 @@ def test_confirm_pay():
     payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
     user = User(1, 'test@gmail.com', 111111111, payment_data)
 
-    pay_confirmation = user.pay(trip)
+    assert user.pay(trip)
 
