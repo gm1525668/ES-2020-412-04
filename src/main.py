@@ -19,7 +19,7 @@ def main():
         usuario = User.User(id_user=1, email='pepe@gmail.com', phone=72419547, payment_data=datospago)
 
         print('*Validación de los datos*', '\n')
-        if (datoscorrectos)
+        if (datoscorrectos):
             datoscorrectos=True
         else:
             print('Datos de facturación incorrectos, vuelva a rellenar:')
