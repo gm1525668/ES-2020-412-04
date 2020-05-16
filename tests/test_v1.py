@@ -15,7 +15,6 @@ from src.Cars import Cars
         self.assertTrue(usu.pay(Trip))"""
 
 
-
 @pytest.mark.parametrize('n_pas, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
 def test_num_pas(n_pas, result):
     trip = Trip.Trip(n_pas, 'BCN', 'LDN', 0, 0, 100)
