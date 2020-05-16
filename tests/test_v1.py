@@ -6,14 +6,6 @@ from src.Flights import Flights
 from src.Hotels import Hotels
 from src.Cars import Cars
 
-"""class TestPayment(unittest.TestCase):
-    def test_payment(self):
-        # set up user
-        payment = PaymentData.PaymentData('visa', 'guillem', 43, 56, 140)
-        trip = Trip.Trip(2, 'BCN', 'LDN', 0, 0, 100)
-        usu = User(7658, 'D@GMAIL.COM', 653648925, payment)
-        self.assertTrue(usu.pay(Trip))"""
-
 
 @pytest.mark.parametrize('num_passengers, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
 def test_num_passengers(num_passengers, result):
@@ -70,7 +62,6 @@ def test_add_destination_flight_list():
     trip.add_destination(flight5, hotel4, car4)
 
     result_flights_list = [flight1, flight2, flight3, flight4, flight5, flight6]
-
     assert trip.flight_list == result_flights_list
 
 

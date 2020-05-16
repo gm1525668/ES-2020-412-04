@@ -20,13 +20,9 @@ class User:
         trip.calc_price()
         self.payment_data.price = trip.price
 
-        if Bank.do_payment(self, self.payment_data):
+        bank = Bank.Bank()
+        if bank.do_payment(self, self.payment_data):
             return True
         else:
+            print('Error: No se ha podido realizar el pago correctamente.')
             return False
-
-    def Confirmar_Vol(self, flight: Flights):
-        if flight.num_passengers != 'None' or flight.destination != 'None' or flight.id_flight != 'None':
-            return False
-        else:
-            return True

@@ -26,10 +26,10 @@ class Trip:
         if flight not in self.flight_list:
             self.flight_list.insert((len(self.flight_list) - 1), flight)
 
-            if hotel is not None & hotel not in self.hotel_list:
-                self.flight_list.append(flight)
+            if hotel is not None and hotel not in self.hotel_list:
+                self.hotel_list.append(hotel)
 
-            if car is not None & car not in self.car_list:
+            if car is not None and car not in self.car_list:
                 self.car_list.append(car)
         else:
             print('Destino ya seleccionado')
@@ -38,10 +38,10 @@ class Trip:
         if flight in self.flight_list:
             self.flight_list.remove(flight)
 
-            if hotel is not None & hotel in self.hotel_list:
-                self.flight_list.remove(flight)
+            if hotel is not None and hotel in self.hotel_list:
+                self.hotel_list.remove(hotel)
 
-            if car is not None & car in self.car_list:
+            if car is not None and car in self.car_list:
                 self.car_list.remove(car)
         else:
             print('Destino no valido para eliminar')
@@ -59,6 +59,7 @@ class Trip:
     def reserve_flights(self, user: User):
         for flight in self.flight_list:
             if not flight.reserve_flight(user):
+                print('Error: No se ha podido reservar el vuelo ' + str(flight.id_flight) + ' correctamente.')
                 return False
 
         return True
