@@ -1,4 +1,4 @@
-class Flight:
+class Flights:
 
     # id_flight = Identificador vuelo
     # destination = Destino

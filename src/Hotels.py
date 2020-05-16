@@ -1,4 +1,4 @@
-class Hotel:
+class Hotels:
 
     # id_hotel = Identificador hotel
     # name = Nombre
