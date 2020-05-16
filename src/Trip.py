@@ -6,13 +6,13 @@ class Trip:
     # start_date = Fecha de salida
     # finish_date = Fecha de llegada
     # price = Precio
-    def __init__(self, num_passengers, origin, destinations, flight_list, hotel_list, car_list, start_date, finish_date, price, user):
+    def __init__(self, num_passengers, origin, last_destination, flight_list, hotel_list, car_list, start_date, finish_date, price, user):
         self.num_passengers = num_passengers
         self.origin = origin
-        self.destination = destinations
-        self.flight = flight_list
-        self.hotel = hotel_list
-        self.car = car_list
+        self.last_destination = last_destination
+        self.flight_list = flight_list
+        self.hotel_list = hotel_list
+        self.car_list = car_list
         self.start_date = start_date
         self.finish_date = finish_date
         self.price = price
