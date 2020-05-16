@@ -1,3 +1,4 @@
+
 from . import User
 from . import Flights
 from . import Hotels
@@ -59,12 +60,11 @@ class Trip:
     def Confirmar_Vol(self, flight: Flights):
         Confirm = 0
         for counter, flight in enumerate(self.flight_list):
-            if flight.num_passengers != 'None' or flight.destination != 'None' or flight.id_flight != 'None' or flight.price != 'None':
-                print('No se ha podido confirmar la reserva de vuelo numero:' + counter)
-
-            else:
+            if flight.num_passengers != 0 and flight.destination != 'None' and flight.id_flight != 0 and flight.price != 0:
                 print('Confirmación Correcta')
                 Confirm += 1
+            else:
+                print('No se ha podido confirmar la reserva de vuelo numero:' + str(counter))
         if Confirm == len(self.flight_list):
             return True
         else:
