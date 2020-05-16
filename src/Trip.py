@@ -23,7 +23,7 @@ class Trip:
 
     def add_destination(self, flight: Flights, hotel: Hotels, car: Cars):
         if flight not in self.flight_list:
-            self.flight_list.append(flight)
+            self.flight_list.insert((len(self.flight_list) - 1), flight)
 
             if hotel is not None & hotel not in self.hotel_list:
                 self.flight_list.append(flight)
@@ -44,3 +44,13 @@ class Trip:
                 self.car_list.remove(car)
         else:
             print('Destino no valido para eliminar')
+
+    def calc_price(self):
+        for flight in self.flight_list:
+            self.price += flight.price
+
+        for hotel in self.hotel_list:
+            self.price += hotel.price
+
+        for car in self.car_list:
+            self.price += car.price
