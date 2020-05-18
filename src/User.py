@@ -1,7 +1,7 @@
 from . import PaymentData
 from . import Trip
 from . import Flights
-from . import Bank
+from src.Bank import Bank
 
 
 class User:
@@ -20,7 +20,7 @@ class User:
         trip.calc_price()
         self.payment_data.price = trip.price
 
-        bank = Bank.Bank()
+        bank = Bank()
         if bank.do_payment(self, self.payment_data):
             return True
         else:

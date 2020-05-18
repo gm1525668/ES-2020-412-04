@@ -235,9 +235,8 @@ def test_confirm_pay():
     assert user.pay(trip)
 
 
-""""
 class testPayment(unittest.TestCase):
-    @mock.patch('src.Bank')
+    @mock.patch('src.User.Bank')
     def test_payment(self, mock_bank):
         num_passengers = 2
 
@@ -270,8 +269,7 @@ class testPayment(unittest.TestCase):
         user = User(1, 'test@gmail.com', 111111111, payment_data)
 
         mock_bank.return_value.do_payment.return_value = False
-        self.assertFalse(User.pay(trip, payment_data))
-"""
+        self.assertFalse(user.pay(trip))
 
 
 def test_confirm_vol():
