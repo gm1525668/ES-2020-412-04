@@ -5,6 +5,6 @@ def test_retry_payment():
 
 
 # mock test, falta que este dentro de una clase, ojo
-def test_retry_reserve_car():
+def test_retry_reserve_flight():
     assert True == True  # se reserva
     assert False == False  # no se reserva
