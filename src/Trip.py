@@ -24,7 +24,7 @@ class Trip:
         self.price = price
 
     def add_destination(self, flight: Flights, hotel: Hotels, car: Cars):
-        if flight not in self.flight_list:
+         if flight not in self.flight_list:
             self.flight_list.insert((len(self.flight_list) - 1), flight)
 
             if hotel is not None and hotel not in self.hotel_list:
@@ -69,6 +69,35 @@ class Trip:
             return True
         else:
             return False
+    def confirmar_coche(self, car: Cars):
+        confirm = 0
+        for counter, car in enumerate(self.car_list):
+            if car.id_car != 0 and car.brand != 'None' and car.place != 0 and car.days != 0 and car.price != 0:
+                print('Confirmación Correcta')
+                confirm += 1
+            else:
+                print('No se ha podido confirmar la reserva del coche numero:' + str(counter))
+        if confirm == len(self.car_list):
+            return True
+        else:
+            return False
+
+    def confirmar_hotel(self,hotel : Hotels):
+        confirm = 0
+        for counter, hotel in enumerate(self.hotel_list):
+            if hotel.id_hotel != 'None' and hotel.name !='None' and  hotel.num_guests != 0 and hotel.num_rooms != 0 and hotel.days != 0 and hotel.price != 0:
+                print('Confirmación Correcta')
+                confirm += 1
+            else:
+                print('No se ha podido confirmar la reserva del Hotel  numero:' + str(counter))
+        if confirm == len(self.hotel_list):
+            return True
+        else:
+            return False
+
+
+
+
 
     def reserve_flights(self, user: User):
         for flight in self.flight_list:
@@ -77,3 +106,6 @@ class Trip:
                 return False
 
         return True
+
+
+
