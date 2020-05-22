@@ -15,7 +15,7 @@ class Flights:
         self.price = price
 
     def reserve_flight(self, user: User):
-        skyscanner = Skyscanner.Skyscanner()
+        skyscanner = Skyscanner()
         if skyscanner.confirm_reserve(user, self):
             return True
         else:
