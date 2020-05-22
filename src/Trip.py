@@ -44,6 +44,7 @@ class Trip:
         return [destination['car'] for destination in self.destination_list]
 
     def calc_price(self):
+        self.price=0
         for flight in self.get_flights():
             if flight is not None:
                 self.price += flight.price
@@ -168,13 +169,13 @@ class Trip:
                 print('Error:No se ha podido reservar el coche'+ str(hotel.id_hotel) + 'correctamente')
 
     def add_car(self, n_dest, car: Cars):
-        if car is not None and self.destination_list[n_dest]['car'] == 0:
-            self.destination_list[n_dest]['car'].insert(car)
+        if car is not None and self.destination_list[n_dest]['car'] == None:
+            self.destination_list[n_dest]['car']=car
         else:
             print('Este destino ya tiene un coche asignado')
 
     def remove_car(self, n_dest, car: Cars):
-        if car is not None and self.destination_list[n_dest]['car'] == 0:
-            self.destination_list[n_dest]['car'].remove(car)
+        if car is not None and self.destination_list[n_dest]['car'] != None:
+            self.destination_list[n_dest]['car'] = None
         else:
             print('Este destino ya tiene un coche asignado')

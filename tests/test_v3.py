@@ -6,6 +6,8 @@ from src.Trip import Trip
 from src.Flights import Flights
 from src.Hotels import Hotels
 from src.Cars import Cars
+
+
 def test_car_list():
     assert True == True  # quitar de lista
     assert True == True  # poner en la lista
@@ -17,13 +19,11 @@ def test_recalculate_price_trip_if_add_remove_car():
     flight1 = Flights(1, 'BRE', num_passengers, 10)
     flight2 = Flights(2, 'BRU', num_passengers, 20)
     flight3 = Flights(3, 'MRS', num_passengers, 30)
-    flight4 = Flights(4, 'DUB', num_passengers, 40)
     flight5 = Flights(5, 'BCN', num_passengers, 50)
 
     hotel1 = Hotels(1, 'Hotel 1', num_passengers, 1, 2, 50)
     hotel2 = Hotels(2, 'Hotel 2', num_passengers, 1, 2, 50)
     hotel3 = Hotels(3, 'Hotel 3', num_passengers, 1, 2, 50)
-    hotel4 = Hotels(4, 'Hotel 4', num_passengers, 1, 2, 50)
 
     car1 = Cars(1, 'Honda', 'Airport', 2, 25)
     car2 = Cars(2, 'Audi', 'Airport', 2, 25)
@@ -38,13 +38,17 @@ def test_recalculate_price_trip_if_add_remove_car():
     ]
 
     trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.add_car(4, car4)
-    trip.add_car(5, car3)
-    trip.remove_car(2, car2)
+    trip.add_car(3, car4)
     trip.calc_price()
 
     result_price = 360
     assert trip.price == result_price
+
+    trip.remove_car(3, car4)
+    result_price=335
+    trip.calc_price()
+    assert trip.price ==result_price
+
 
 def test_hotel_list():
     assert True == True  # quitar de lista
