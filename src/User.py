@@ -39,7 +39,7 @@ class User:
                 self.email = email
 
         if phone is not None:
-            if not str(phone).isnumeric() and len(phone) is not 9:
+            if not str(phone).isnumeric() and len(phone) != 9:
                 print('Error: Formato de número de teléfono no válido.')
                 return False
             else:

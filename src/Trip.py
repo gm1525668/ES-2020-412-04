@@ -152,20 +152,37 @@ class Trip:
 
         print('Ok: Vuelos reservados correctamente.')
         return True
-    def reserve_car(self,user: User):
-        for car in self.get_cars():
-            if not car.reserve_cars(user):
-                print('Error:No se ha podido reservar el coche '+ str(car.id_car) + ' correctamente')
-                return False
-        print('Ok: Coche reservados correctamente.')
+
+    def reserve_hotels(self, user: User):
+        for hotel in self.get_hotels():
+            if hotel is not None:
+                attempts = 0
+                check = hotel.reserve_hotel(user)
+                while attempts < 1 and not check:
+                    check = hotel.reserve_hotel(user)
+                    attempts += 1
+
+                if not check:
+                    print('Error: No se ha podido reservar el hotel ' + str(hotel.id_hotel) + ' correctamente.')
+                    return False
+
+        print('Ok: Hoteles reservados correctamente.')
         return True
 
-    def reserve_hotel(self,user: User):
-        for hotel in self.get_hotels():
-            if not hotel.reserve_hotel(user):
-                print('Error:No se ha podido reservar el hotel '+ str(hotel.id_hotel) + ' correctamente')
-                return False
-        print('Ok: Hotel reservados correctamente.')
+    def reserve_cars(self, user: User):
+        for car in self.get_cars():
+            if car is not None:
+                attempts = 0
+                check = car.reserve_car(user)
+                while attempts < 1 and not check:
+                    check = car.reserve_car(user)
+                    attempts += 1
+
+                if not check:
+                    print('Error: No se ha podido reservar el coche ' + str(car.id_car) + ' correctamente.')
+                    return False
+
+        print('Ok: Coches reservados correctamente.')
         return True
 
     def add_car(self, n_dest, car: Cars):
@@ -179,15 +196,3 @@ class Trip:
             self.destination_list[n_dest]['car'] = None
         else:
             print('Este destino ya tiene un coche asignado')
-
-    def add_hotel(self, n_destination, hotel: Hotels):
-        if hotel is not None and self.destination_list[n_destination]['hotel'] == None:
-            self.destination_list[n_destination]['hotel']=hotel
-        else:
-            print('Este destino ya tiene un hotel asignado')
-
-    def remove_hotel(self, n_destination, hotel: Hotels):
-        if hotel is not None and self.destination_list[n_destination]['hotel'] != None:
-            self.destination_list[n_destination]['hotel'] = None
-        else:
-            print('Este destino ya tiene un hotel asignado')

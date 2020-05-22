@@ -25,13 +25,13 @@ class PaymentData:
         else:
             print('Ok: Titular de tarjeta válido.')
 
-        if not self.num.isnumeric() and len(self.num) is not 16:
+        if not self.num.isnumeric() and len(self.num) != 16:
             print('Error: Número de tarjeta no válido.')
             return False
         else:
             print('Ok: Número de tarjeta válido.')
 
-        if not self.num.isnumeric() and len(self.num) is not 4:
+        if not self.num.isnumeric() and len(self.num) != 4:
             print('Error: Código de seguridad no válido.')
             return False
         else:

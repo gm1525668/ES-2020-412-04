@@ -15,7 +15,7 @@ class Cars:
         self.days = days
         self.price = price
 
-    def reserve_cars(self, user: User):
+    def reserve_car(self, user: User):
         rentalcars = Rentalcars()
         if rentalcars.confirm_reserve(user, self):
             return True
