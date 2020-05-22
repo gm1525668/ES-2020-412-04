@@ -20,7 +20,7 @@ class Hotels:
 
     def reserve_hotel(self, user: User):
         booking = Booking.Booking()
-        if booking.confirm_reserve(user,self):
+        if booking.confirm_reserve(user, self):
             return True
         else:
             return False
