@@ -153,3 +153,28 @@ class Trip:
         for hotel in self.hotel_list:
             if not hotel.reserve_hotel(user):
                 print('Error:No se ha podido reservar el coche'+ str(hotel.id_hotel) + 'correctamente')
+
+
+    def reserve_car(self,user: User):
+        for car in self.car_list:
+            if not car.reserve_cars(user):
+                print('Error:No se ha podido reservar el coche'+ str(car.id_car) + 'correctamente')
+                return False
+        return True
+
+    def reserve_hotel(self,user: User):
+        for hotel in self.hotel_list:
+            if not hotel.reserve_hotel(user):
+                print('Error:No se ha podido reservar el coche'+ str(hotel.id_hotel) + 'correctamente')
+
+    def add_car(self, n_dest, car: Cars):
+        if car is not None and self.destination_list[n_dest]['car'] == 0:
+            self.destination_list[n_dest]['car'].insert(car)
+        else:
+            print('Este destino ya tiene un coche asignado')
+
+    def remove_car(self, n_dest, car: Cars):
+        if car is not None and self.destination_list[n_dest]['car'] == 0:
+            self.destination_list[n_dest]['car'].remove(car)
+        else:
+            print('Este destino ya tiene un coche asignado')
