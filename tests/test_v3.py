@@ -155,7 +155,6 @@ def test_recalculate_price_trip_if_add_remove_hotel():
     result_price=335
     assert trip.price ==result_price
 
-# mock test, falta que este dentro de una clase, ojo
 class testReserveCar(unittest.TestCase):
     @mock.patch('src.Trip.Cars.Rentalcars')
     def test_reserve_car(self,mock_Rentalcars):# se reserva
@@ -188,6 +187,7 @@ class testReserveCar(unittest.TestCase):
         trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
+        self.assertTrue(trip.reserve_cars(user))
         mock_Rentalcars.return_value.confirm_reserve.return_value = False
         self.assertFalse (trip.reserve_cars(user))
 
@@ -223,6 +223,8 @@ class testReserveHotel(unittest.TestCase):
         trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
+        self.assertTrue(trip.reserve_hotels(user))
+
         mock_Booking.return_value.confirm_reserve.return_value = False
         self.assertFalse(trip.reserve_hotels(user))
 
