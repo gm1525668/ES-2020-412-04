@@ -3,6 +3,9 @@ from . import Flights
 from . import Hotels
 from . import Cars
 
+        print('Ok: Hotel reservados correctamente.')
+        return True
+
 
 class Trip:
 
@@ -173,21 +176,34 @@ class Trip:
             if not car.reserve_cars(user):
                 print('Error:No se ha podido reservar el coche'+ str(car.id_car) + 'correctamente')
                 return False
+        print('Ok: Coches reservados correctamente.')
         return True
 
     def reserve_hotel(self,user: User):
-        for hotel in self.hotel_list:
-            if not hotel.reserve_hotel(user):
+        for hotel in self.get_hotels():
+            if not hotel.reserve_hotel:
                 print('Error:No se ha podido reservar el coche'+ str(hotel.id_hotel) + 'correctamente')
 
     def add_car(self, n_dest, car: Cars):
-        if car is not None and self.destination_list[n_dest]['car'] == None:
-            self.destination_list[n_dest]['car']=car
+        if car is not None and self.destination_list[n_dest]['car'] == 0:
+            self.destination_list[n_dest]['car'].insert(car)
         else:
             print('Este destino ya tiene un coche asignado')
 
     def remove_car(self, n_dest, car: Cars):
-        if car is not None and self.destination_list[n_dest]['car'] != None:
-            self.destination_list[n_dest]['car'] = None
+        if car is not None and self.destination_list[n_dest]['car'] == 0:
+            self.destination_list[n_dest]['car'].remove(car)
         else:
             print('Este destino ya tiene un coche asignado')
+
+    def add_hotel(self, n_destination, hotel: Hotels):
+        if hotel is not None and self.destination_list[n_destination]['hotel'] == 0:
+            self.destination_list[n_destination]['hotel'].insert(hotel)
+        else:
+            print('Este destino ya tiene un hotel asignado')
+
+    def remove_hotel(self, n_destination, hotel: Hotels):
+        if hotel is not None and self.destination_list[n_destination]['hotel'] == 0:
+            self.destination_list[n_destination]['hotel'].remove(hotel)
+        else:
+            print('Este destino ya tiene un hotel asignado')
