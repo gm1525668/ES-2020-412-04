@@ -63,8 +63,14 @@ class Trip:
             if flight.num_passengers != 0 and flight.destination != 'None' and flight.id_flight != 0 and flight.price != 0:
                 print('Confirmación Correcta')
                 Confirm += 1
-            else:
-                print('No se ha podido confirmar la reserva de vuelo numero:' + str(counter))
+            elif flight.num_passengers == 0:
+                print('No se ha podido confirmar la reserva de vuelo numero:' + str(counter) + 'debido a que no esta indicado en numero de pasajeros.')
+            elif flight.destination == 0:
+                print('No se ha podido confirmar la reserva de vuelo numero:' + str(counter) + 'debido a que no esta indicada destinacion.')
+            elif flight.id_flight == 0:
+                print('No se ha podido confirmar la reserva de vuelo numero:' + str(counter) + 'debido a que no esta indicada la id del vuelo.')
+            elif flight.price == 0:
+                print('No se ha podido confirmar la reserva de vuelo numero:' + str(counter) + 'debido a que no esta indicado el precio.')
         if Confirm == len(self.flight_list):
             return True
         else:
@@ -75,8 +81,16 @@ class Trip:
             if car.id_car != 0 and car.brand != 'None' and car.place != 0 and car.days != 0 and car.price != 0:
                 print('Confirmación Correcta')
                 confirm += 1
-            else:
-                print('No se ha podido confirmar la reserva del coche numero:' + str(counter))
+            elif car.id_car == 0:
+                print('No se ha podido confirmar la reserva de coche numero:' + str(counter) + 'debido a que no esta indicada la id del coche.')
+            elif car.brand == 0:
+                print('No se ha podido confirmar la reserva de coche numero:' + str(counter) + 'debido a que no esta indicada la marca del coche.')
+            elif car.place == 0:
+                print('No se ha podido confirmar la reserva de coche numero:' + str(counter) + 'debido a que no estan indicadas las plazas del coche.')
+            elif car.days == 0:
+                print('No se ha podido confirmar la reserva de coche numero:' + str(counter) + 'debido a que no esta indicados los dias de alquiler del coche.')
+            elif car.price == 0:
+                print('No se ha podido confirmar la reserva de coche numero:' + str(counter) + 'debido a que no esta indicado el precio del coche.')
         if confirm == len(self.car_list):
             return True
         else:
@@ -88,8 +102,18 @@ class Trip:
             if hotel.id_hotel != 'None' and hotel.name !='None' and  hotel.num_guests != 0 and hotel.num_rooms != 0 and hotel.days != 0 and hotel.price != 0:
                 print('Confirmación Correcta')
                 confirm += 1
-            else:
-                print('No se ha podido confirmar la reserva del Hotel  numero:' + str(counter))
+            elif hotel.id_hotel == 0:
+                print('No se ha podido confirmar la reserva de hotel numero:' + str(counter) + 'debido a que no esta indicada la id del hotel.')
+            elif hotel.name == 0:
+                print('No se ha podido confirmar la reserva de hotel numero:' + str( counter) + 'debido a que no esta indicado el nombre del hotel.')
+            elif hotel.num_guests == 0:
+                print('No se ha podido confirmar la reserva de hotel numero:' + str(counter) + 'debido a que no esta indicado el numero de personas que residiran en el hotel.')
+            elif hotel.num_rooms == 0:
+                print('No se ha podido confirmar la reserva de hotel numero:' + str(counter) + 'debido a que no esta indicado el numero de habitaciones reservadas.')
+            elif hotel.days == 0:
+                print('No se ha podido confirmar la reserva de hotel numero:' + str(counter) + 'debido a que no estan indicados los dias de la reserva.')
+            elif hotel.price == 0:
+                print('No se ha podido confirmar la reserva de hotel numero:' + str(counter) + 'debido a que no esta indicado el precio del hotel.')
         if confirm == len(self.hotel_list):
             return True
         else:
