@@ -1,8 +1,8 @@
+import re
 from . import PaymentData
 from . import Trip
-from . import Flights
 from src.Bank import Bank
-import re
+
 
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 

@@ -1,4 +1,5 @@
 import pytest
+from datetime import date
 from src.User import User
 from src.PaymentData import PaymentData
 from src.Trip import Trip
@@ -28,14 +29,14 @@ def test_payment_method(payment_method, result):
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
     payment_data = PaymentData(payment_method, 'Test', '4940190000370787', 1111, 0)
     user = User(1, 'test@gmail.com', 111111111, payment_data)
@@ -64,14 +65,14 @@ def test_pay_message_on_error():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
     payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
     user = User(1, 'test@gmail.com', 111111111, payment_data)
@@ -99,14 +100,14 @@ def test_reserve_flights_message_on_error():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
     payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
     user = User(1, 'test@gmail.com', 111111111, payment_data)

@@ -1,13 +1,13 @@
+import pytest
 import unittest
 from unittest import mock
-import pytest
+from datetime import date
 from src.User import User
 from src.PaymentData import PaymentData
 from src.Trip import Trip
 from src.Flights import Flights
 from src.Hotels import Hotels
 from src.Cars import Cars
-from datetime import date
 
 
 @pytest.mark.parametrize('num_passengers, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
