@@ -1,3 +1,7 @@
+from . import User
+from . import Booking
+
+
 class Hotels:
 
     # id_hotel = Identificador hotel
@@ -13,3 +17,14 @@ class Hotels:
         self.num_rooms = num_rooms
         self.days = days
         self.price = price
+
+    def reserve_hotel(self, user: User):
+        booking = Booking.Booking()
+        if booking.confirm_reserve(user,self):
+            return True
+        else:
+            return False
+
+
+
+
