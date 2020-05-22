@@ -6,14 +6,79 @@ from src.Trip import Trip
 from src.Flights import Flights
 from src.Hotels import Hotels
 from src.Cars import Cars
+
+
 def test_car_list():
-    assert True == True  # quitar de lista
-    assert True == True  # poner en la lista
+    num_passengers = 2
+
+    flight1 = Flights(1, 'BRE', num_passengers, 10)
+    flight2 = Flights(2, 'BRU', num_passengers, 20)
+    flight3 = Flights(3, 'MRS', num_passengers, 30)
+    flight5 = Flights(5, 'BCN', num_passengers, 50)
+
+    hotel1 = Hotels(1, 'Hotel 1', num_passengers, 1, 2, 50)
+    hotel2 = Hotels(2, 'Hotel 2', num_passengers, 1, 2, 50)
+    hotel3 = Hotels(3, 'Hotel 3', num_passengers, 1, 2, 50)
+
+    car1 = Cars(1, 'Honda', 'Airport', 2, 25)
+    car2 = Cars(2, 'Audi', 'Airport', 2, 25)
+    car3 = Cars(3, 'Mercedes', 'Airport', 2, 25)
+    car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
+
+    destination_list = [
+        {'flight': flight1, 'hotel': hotel1, 'car': car1},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3},
+        {'flight': flight5, 'hotel': None, 'car': None}
+    ]
+
+    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip.add_car(3, car4)
+
+    result_cars_list = [car1, car2, car3, car4]
+    assert trip.get_cars() == result_cars_list
+
+    trip.remove_car(3, car4)
+    result_cars_list = [car1, car2, car3, None]
+    assert trip.get_cars() == result_cars_list
 
 
 def test_recalculate_price_trip_if_add_remove_car():
-    assert True == True  # quitar de lista
-    assert True == True  # poner en la lista
+    num_passengers = 2
+
+    flight1 = Flights(1, 'BRE', num_passengers, 10)
+    flight2 = Flights(2, 'BRU', num_passengers, 20)
+    flight3 = Flights(3, 'MRS', num_passengers, 30)
+    flight5 = Flights(5, 'BCN', num_passengers, 50)
+
+    hotel1 = Hotels(1, 'Hotel 1', num_passengers, 1, 2, 50)
+    hotel2 = Hotels(2, 'Hotel 2', num_passengers, 1, 2, 50)
+    hotel3 = Hotels(3, 'Hotel 3', num_passengers, 1, 2, 50)
+
+    car1 = Cars(1, 'Honda', 'Airport', 2, 25)
+    car2 = Cars(2, 'Audi', 'Airport', 2, 25)
+    car3 = Cars(3, 'Mercedes', 'Airport', 2, 25)
+    car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
+
+    destination_list = [
+        {'flight': flight1, 'hotel': hotel1, 'car': car1},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3},
+        {'flight': flight5, 'hotel': None, 'car': None}
+    ]
+
+    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip.add_car(3, car4)
+    trip.calc_price()
+
+    result_price = 360
+    assert trip.price == result_price
+
+    trip.remove_car(3, car4)
+    result_price=335
+    trip.calc_price()
+    assert trip.price ==result_price
+
 
 def test_hotel_list():
     assert True == True  # quitar de lista
