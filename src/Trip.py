@@ -61,18 +61,18 @@ class Trip:
 
         for index, destination in enumerate(self.destination_list):
             value_to_insert = {'flight_total': destination['flight'].price,
-                               'flight_person': (destination['flight'].price / self.num_passengers),
+                               'flight_person': round(destination['flight'].price / self.num_passengers, 2),
                                'hotel_total': 0,
                                'hotel_day_person': 0,
                                'car_total': 0,
                                'car_day': 0}
             if destination['hotel'] is not None:
                 value_to_insert['hotel_total'] = destination['hotel'].price
-                value_to_insert['hotel_day_person'] = (destination['hotel'].price / (self.num_passengers * destination['days']))
+                value_to_insert['hotel_day_person'] = round(destination['hotel'].price / (self.num_passengers * destination['days']), 2)
 
             if destination['car'] is not None:
                 value_to_insert['car_total'] = destination['car'].price
-                value_to_insert['car_day'] = destination['car'].price / destination['days']
+                value_to_insert['car_day'] = round(destination['car'].price / destination['days'], 2)
 
             result['destination'].append(value_to_insert)
             result['destination_total'].append(value_to_insert['flight_total'] + value_to_insert['hotel_total'] + value_to_insert['car_total'])
