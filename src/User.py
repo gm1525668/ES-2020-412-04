@@ -2,7 +2,9 @@ from . import PaymentData
 from . import Trip
 from . import Flights
 from src.Bank import Bank
+import re
 
+EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 
 class User:
 
@@ -26,3 +28,26 @@ class User:
         else:
             print('Error: No se ha podido realizar el pago correctamente.')
             return False
+
+    def set_data(self, email, phone, payment_data: PaymentData):
+        if email is not None:
+            if not EMAIL_REGEX.match(email):
+                print('Error: Formato de email no válido.')
+                return False
+            else:
+                print('Ok: Formato de email de teléfono válido.')
+                self.email = email
+
+        if phone is not None:
+            if not str(phone).isnumeric() and len(phone) is not 9:
+                print('Error: Formato de número de teléfono no válido.')
+                return False
+            else:
+                print('Ok: Formato de número de teléfono válido.')
+                self.phone = phone
+
+        if not payment_data.check_data():
+            return False
+
+        print('Ok: Datos de facturación completos.')
+        return True

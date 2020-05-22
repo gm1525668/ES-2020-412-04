@@ -43,6 +43,13 @@ class Trip:
 
         return -1
 
+    def get_destination_index(self, flight: Flights):
+        if flight in self.get_flights():
+            index = next((index for index, destination in enumerate(self.destination_list) if destination['flight'] == flight), None)
+            return index
+
+        return -1
+
     def get_flights(self):
         return [destination['flight'] for destination in self.destination_list]
 
