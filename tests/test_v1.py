@@ -21,10 +21,6 @@ def test_no_destination_flight_list_empty():
     assert trip.get_flights() == []
 
 
-def test_no_destination_flights():
-    return True
-
-
 def test_no_destinations_price_zero():
     num_passengers = 2
 

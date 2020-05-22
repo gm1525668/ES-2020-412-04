@@ -12,7 +12,7 @@ def test_car_list():
     assert True == True  # poner en la lista
 
 
-def test_recalculate_price_trip_if_add_remove_hotel():
+def test_recalculate_price_trip_if_add_remove_car():
     assert True == True  # quitar de lista
     assert True == True  # poner en la lista
 
@@ -74,7 +74,7 @@ def test_reserve_hotel():
     assert False == False  # no se reserva
 
 # mock test, falta que este dentro de una clase, ojo
-def test_reserve_car():
+def test_reserve_flight():
     assert True == True  # se reserva
     assert False == False  # no se reserva
 
