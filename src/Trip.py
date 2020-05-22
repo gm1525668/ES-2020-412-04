@@ -142,3 +142,14 @@ class Trip:
 
         print('Ok: Vuelos reservados correctamente.')
         return True
+    def reserve_car(self,user: User):
+        for car in self.car_list:
+            if not car.reserve_cars(user):
+                print('Error:No se ha podido reservar el coche'+ str(car.id_car) + 'correctamente')
+                return False
+        return True
+
+    def reserve_hotel(self,user: User):
+        for hotel in self.hotel_list:
+            if not hotel.reserve_hotel(user):
+                print('Error:No se ha podido reservar el coche'+ str(hotel.id_hotel) + 'correctamente')
