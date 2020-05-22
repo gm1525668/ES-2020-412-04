@@ -55,6 +55,7 @@ def test_retry_reserve_hotel():
 
     trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
     trip.reserve_hotel()
+
     assert True == True  # se reserva
     assert False == False  # no se reserva
 
