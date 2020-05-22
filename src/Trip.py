@@ -44,6 +44,7 @@ class Trip:
         return [destination['car'] for destination in self.destination_list]
 
     def calc_price(self):
+        self.price = 0
         for flight in self.get_flights():
             if flight is not None:
                 self.price += flight.price
