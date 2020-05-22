@@ -1,6 +1,5 @@
 import unittest
 from unittest import mock
-import pytest
 from src.User import User
 from src.PaymentData import PaymentData
 from src.Trip import Trip
@@ -12,7 +11,7 @@ def test_car_list():
     assert True == True  # poner en la lista
 
 
-def test_recalculate_price_trip_if_add_remove_hotel():
+def test_recalculate_price_trip_if_add_remove_car():
     assert True == True  # quitar de lista
     assert True == True  # poner en la lista
 
@@ -65,6 +64,7 @@ class testReserveCar(unittest.TestCase):
 
 # mock test, falta que este dentro de una clase, ojo
 
+
 class testReserveHotel(unittest.TestCase):
     @mock.patch('src.User.Booking.py')
     def test_reserve_car(self, mock_Booking):  # se reserva
@@ -99,6 +99,7 @@ class testReserveHotel(unittest.TestCase):
         mock_Booking.return_value.confirm_reserve.return_value = False
         self.assertFalse(trip.reserve_hotel(user))
 
+
     assert True == True  # se reserva
     assert False == False  # no se reserva
 
@@ -109,4 +110,5 @@ def test_calculate_price():
     assert True == True
     assert True == True
     assert True == True
+
 
