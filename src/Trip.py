@@ -43,13 +43,6 @@ class Trip:
 
         return -1
 
-    def get_destination_index(self, flight: Flights):
-        if flight in self.get_flights():
-            index = next((index for index, destination in enumerate(self.destination_list) if destination['flight'] == flight), None)
-            return index
-
-        return -1
-
     def get_flights(self):
         return [destination['flight'] for destination in self.destination_list]
 
@@ -159,23 +152,20 @@ class Trip:
 
         print('Ok: Vuelos reservados correctamente.')
         return True
-
-    def reserve_hotels(self, user: User):
-        for hotel in self.get_hotels():
-            if not hotel.reserve_hotel(user):
-                print('Error: No se ha podido reservar el coche ' + str(hotel.id_hotel) + ' correctamente.')
-                return False
-
-        print('Ok: Hoteles reservados correctamente.')
-        return True
-
-    def reserve_cars(self, user: User):
+    def reserve_car(self,user: User):
         for car in self.get_cars():
             if not car.reserve_cars(user):
-                print('Error: No se ha podido reservar el coche ' + str(car.id_car) + ' correctamente.')
+                print('Error:No se ha podido reservar el coche'+ str(car.id_car) + 'correctamente')
                 return False
+        print('Ok: Coche reservados correctamente.')
+        return True
 
-        print('Ok: Coches reservados correctamente.')
+    def reserve_hotel(self,user: User):
+        for hotel in self.get_hotels():
+            if not hotel.reserve_hotel(user):
+                print('Error:No se ha podido reservar el coche'+ str(hotel.id_hotel) + 'correctamente')
+                return False
+        print('Ok: Hotel reservados correctamente.')
         return True
 
     def add_car(self, n_dest, car: Cars):

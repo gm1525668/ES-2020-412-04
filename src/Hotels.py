@@ -19,7 +19,7 @@ class Hotels:
         self.price = price
 
     def reserve_hotel(self, user: User):
-        booking = Booking.Booking()
+        booking = Booking()
         if booking.confirm_reserve(user, self):
             return True
         else:
