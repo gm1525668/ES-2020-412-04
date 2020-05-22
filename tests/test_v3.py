@@ -39,7 +39,7 @@ def test_car_list():
     assert trip.get_cars() == result_cars_list
 
     trip.remove_car(3, car4)
-    result_cars_list = [car1, car2, car3]
+    result_cars_list = [car1, car2, car3, None]
     assert trip.get_cars() == result_cars_list
 
 
