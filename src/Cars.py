@@ -1,6 +1,7 @@
 from . import User
 from . import Rentalcars
 
+
 class Cars:
 
     # id_car = Identificador coche
@@ -21,7 +22,3 @@ class Cars:
             return True
         else:
             return False
-
-
-
-

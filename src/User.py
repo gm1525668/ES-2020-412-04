@@ -6,6 +6,7 @@ import re
 
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 
+
 class User:
 
     # id_user = Identificador usuario
