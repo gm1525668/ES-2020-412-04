@@ -227,9 +227,6 @@ class testReserveHotel(unittest.TestCase):
         self.assertFalse(trip.reserve_hotel(user))
 
 
-    assert True == True  # se reserva
-    assert False == False  # no se reserva
-
 
 def test_calculate_price():
     assert True == True
