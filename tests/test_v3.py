@@ -33,12 +33,12 @@ def test_car_list():
     ]
 
     trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.add_car(3, car4)
+    trip.add_car(Trip.get_destination_index(flight5), car4)
 
     result_cars_list = [car1, car2, car3, car4]
     assert trip.get_cars() == result_cars_list
 
-    trip.remove_car(3, car4)
+    trip.remove_car(Trip.get_destination_index(flight5), car4)
     result_cars_list = [car1, car2, car3, None]
     assert trip.get_cars() == result_cars_list
 
@@ -68,15 +68,16 @@ def test_recalculate_price_trip_if_add_remove_car():
     ]
 
     trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.add_car(3, car4)
+    trip.add_car(Trip.get_destination_index(flight5), car4)
     trip.calc_price()
 
     result_price = 360
     assert trip.price == result_price
 
-    trip.remove_car(3, car4)
-    result_price=335
+    trip.remove_car(Trip.get_destination_index(flight5), car4)
     trip.calc_price()
+
+    result_price=335
     assert trip.price ==result_price
 
 
