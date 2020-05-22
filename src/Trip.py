@@ -196,3 +196,15 @@ class Trip:
             self.destination_list[n_dest]['car'] = None
         else:
             print('Este destino ya tiene un coche asignado')
+
+    def add_hotel(self, n_destination, hotel: Hotels):
+        if hotel is not None and self.destination_list[n_destination]['hotel'] == None:
+            self.destination_list[n_destination]['hotel'] = hotel
+        else:
+            print('Este destino ya tiene un hotel asignado')
+
+    def remove_hotel(self, n_destination, hotel: Hotels):
+        if hotel is not None and self.destination_list[n_destination]['hotel'] != None:
+            self.destination_list[n_destination]['hotel'] = None
+        else:
+            print('Este destino ya tiene un hotel asignado')

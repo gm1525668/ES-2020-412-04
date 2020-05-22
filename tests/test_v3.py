@@ -146,7 +146,7 @@ def test_recalculate_price_trip_if_add_remove_hotel():
     trip.add_hotel(trip.get_destination_index(flight4), hotel4)
     trip.calc_price()
 
-    result_price = 360
+    result_price = 385
     assert trip.price == result_price
 
     trip.remove_hotel(trip.get_destination_index(flight4), hotel4)
@@ -189,7 +189,7 @@ class testReserveCar(unittest.TestCase):
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
         mock_Rentalcars.return_value.confirm_reserve.return_value = False
-        self.assertFalse (trip.reserve_car(user))
+        self.assertFalse (trip.reserve_cars(user))
 
 
 class testReserveHotel(unittest.TestCase):
@@ -224,7 +224,7 @@ class testReserveHotel(unittest.TestCase):
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
         mock_Booking.return_value.confirm_reserve.return_value = False
-        self.assertFalse(trip.reserve_hotel(user))
+        self.assertFalse(trip.reserve_hotels(user))
 
 
 
