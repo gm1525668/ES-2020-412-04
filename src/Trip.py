@@ -19,7 +19,7 @@ class Trip:
         self.start_date = start_date
         self.finish_date = finish_date
         self.price = 0
-
+        self.
     def add_destination(self, flight: Flights, hotel: Hotels, car: Cars):
         if flight not in self.get_flights():
             self.destination_list.insert((len(self.destination_list) - 1),

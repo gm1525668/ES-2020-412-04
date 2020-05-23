@@ -308,9 +308,9 @@ def test_confirm_flight():
     assert Confirm == Result
 
 
-class testRetryReserveFlights(unittest.TestCase):
+class testReserveFlights(unittest.TestCase):
     @mock.patch('src.Trip.Flights.Skyscanner')
-    def test_retry_reserve_flight(self, mock_sky):
+    def test_reserve_flight(self, mock_sky):
         num_passengers = 2
 
         flight1 = Flights(1, 'BRE', num_passengers, 10)
