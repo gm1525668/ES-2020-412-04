@@ -24,11 +24,18 @@ class User:
         self.payment_data.price = trip.price
 
         bank = Bank()
-        if bank.do_payment(self, self.payment_data):
-            return True
-        else:
-            print('Error: No se ha podido realizar el pago correctamente.')
-            return False
+        attempts = 0
+        check = bank.do_payment(self, self.payment_data)
+        while attempts < 1 and not check:
+            check = bank.do_payment(self, self.payment_data)
+            attempts += 1
+
+            if not check:
+                print('Error: No se ha podido realizar el pago correctamente.')
+                return False
+        print('Pago realizado correctamente.')
+        return True
+
 
     def set_data(self, email, phone, payment_data: PaymentData):
         if email is not None:

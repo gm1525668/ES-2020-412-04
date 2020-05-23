@@ -165,9 +165,15 @@ class Trip:
 
     def reserve_flights(self, user: User):
         for flight in self.get_flights():
-            if not flight.reserve_flight(user):
-                print('Error: No se ha podido reservar el vuelo ' + str(flight.id_flight) + ' correctamente.')
-                return False
+            attempts = 0
+            check = flight.reserve_flight(user)
+            while attempts < 1 and not check:
+                check = flight.reserve_flight(user)
+                attempts += 1
+
+                if not check:
+                    print('Error: No se ha podido reservar el vuelo ' + str(flight.id_flight) + ' correctamente.')
+                    return False
 
         print('Ok: Vuelos reservados correctamente.')
         return True
