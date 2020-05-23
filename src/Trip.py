@@ -85,12 +85,12 @@ class Trip:
 
         return result
 
-    def Confirmar_Vol(self, flight: Flights):
-        Confirm = 0
+    def confirm_flight(self, flight: Flights):
+        confirm = 0
         for counter, flight in enumerate(flight):
             if flight.num_passengers != 0 and flight.destination != 'None' and flight.id_flight != 0 and flight.price != 0:
                 print('Confirmación Correcta')
-                Confirm += 1
+                confirm += 1
             elif flight.num_passengers == 0:
                 print('No se ha podido confirmar la reserva de vuelo numero:' + str(
                     counter) + 'debido a que no esta indicado en numero de pasajeros.')
@@ -103,12 +103,12 @@ class Trip:
             elif flight.price == 0:
                 print('No se ha podido confirmar la reserva de vuelo numero:' + str(
                     counter) + 'debido a que no esta indicado el precio.')
-        if Confirm == len(self.get_flights()):
+        if confirm == len(self.get_flights()):
             return True
         else:
             return False
 
-    def confirmar_coche(self, car: Cars):
+    def confirm_car(self, car: Cars):
         confirm = 0
         for counter, car in enumerate(self.get_cars()):
             if car.id_car != 0 and car.brand != 'None' and car.place != 0 and car.days != 0 and car.price != 0:
@@ -134,7 +134,7 @@ class Trip:
         else:
             return False
 
-    def confirmar_hotel(self, hotel: Hotels):
+    def confirm_hotel(self, hotel: Hotels):
         confirm = 0
         for counter, hotel in enumerate(self.get_hotels()):
             if hotel.id_hotel != 'None' and hotel.name != 'None' and hotel.num_guests != 0 and hotel.num_rooms != 0 and hotel.days != 0 and hotel.price != 0:

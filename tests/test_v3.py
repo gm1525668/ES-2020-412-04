@@ -182,7 +182,7 @@ def test_recalculate_price_trip_if_add_remove_hotel():
 
 class TestReserveCar(unittest.TestCase):
     @mock.patch('src.Trip.Cars.Rentalcars')
-    def test_reserve_car(self, mock_rentalcars):  # se reserva
+    def test_reserve_car(self, mock_rentalcars):
         num_passengers = 2
 
         flight1 = Flights(1, 'BRE', num_passengers, 10)

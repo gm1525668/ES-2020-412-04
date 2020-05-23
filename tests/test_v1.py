@@ -239,7 +239,7 @@ def test_confirm_pay():
     assert user.pay(trip)
 
 
-class testPayment(unittest.TestCase):
+class TestPayment(unittest.TestCase):
     @mock.patch('src.User.Bank')
     def test_payment(self, mock_bank):
         num_passengers = 2
@@ -277,7 +277,6 @@ class testPayment(unittest.TestCase):
         self.assertFalse(user.pay(trip))
 
 
-# ARREGLAR ESTA PUTA MIERDA
 def test_confirm_flight():
     num_passengers = 2
 
@@ -307,12 +306,10 @@ def test_confirm_flight():
 
     trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
-    Confirm = trip.Confirmar_Vol(trip.get_flights())
-    Result = True
-    assert Confirm == Result
+    assert trip.confirm_flight(trip.get_flights()) == True
 
 
-class testReserveFlights(unittest.TestCase):
+class TestReserveFlights(unittest.TestCase):
     @mock.patch('src.Trip.Flights.Skyscanner')
     def test_reserve_flight(self, mock_sky):
         num_passengers = 2
@@ -342,10 +339,12 @@ class testReserveFlights(unittest.TestCase):
         ]
 
         trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
+
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
+
+        mock_sky.return_value.confirm_reserve.return_value = True
         self.assertTrue(trip.reserve_flights(user))
 
         mock_sky.return_value.confirm_reserve.return_value = False
-
         self.assertFalse(trip.reserve_flights(user))
