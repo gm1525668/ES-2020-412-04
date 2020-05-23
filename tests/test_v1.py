@@ -1,6 +1,7 @@
+import pytest
 import unittest
 from unittest import mock
-import pytest
+from datetime import date
 from src.User import User
 from src.PaymentData import PaymentData
 from src.Trip import Trip
@@ -11,20 +12,20 @@ from src.Cars import Cars
 
 @pytest.mark.parametrize('num_passengers, result', [(2, 2), (3, 3), (4, 4), (52, 52)])
 def test_num_passengers(num_passengers, result):
-    trip = Trip(num_passengers, 'BCN', [], '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', [], date(2020, 5, 1))
     assert trip.num_passengers == result
 
 
 def test_no_destination_flight_list_empty():
     num_passengers = 2
-    trip = Trip(num_passengers, 'BCN', [], '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', [], date(2020, 5, 1))
     assert trip.get_flights() == []
 
 
 def test_no_destinations_price_zero():
     num_passengers = 2
 
-    trip = Trip(num_passengers, 'BCN', [], '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', [], date(2020, 5, 1))
     trip.calc_price()
 
     assert trip.price == 0
@@ -50,14 +51,14 @@ def test_add_destination_flight_list():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.add_destination(flight4, hotel4, car4)
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
+    trip.add_destination(flight4, hotel4, car4, 2)
 
     result_flights_list = [flight1, flight2, flight3, flight4, flight5]
     assert trip.get_flights() == result_flights_list
@@ -83,17 +84,18 @@ def test_calc_price():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
     trip.calc_price()
 
-    result_price = 450
+    result_price = 450 * 1.16
+    result_price = round(result_price, 2)
     assert trip.price == result_price
 
 
@@ -117,17 +119,18 @@ def test_add_destination_calc_price():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.add_destination(flight4, hotel4, car4)
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
+    trip.add_destination(flight4, hotel4, car4, 2)
     trip.calc_price()
 
-    result_price = 450
+    result_price = 450 * 1.16
+    result_price = round(result_price, 2)
     assert trip.price == result_price
 
 
@@ -151,15 +154,15 @@ def test_remove_destination_flight_list():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.remove_destination(flight4, hotel4, car4)
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
+    trip.remove_destination(flight4)
 
     result_flights_list = [flight1, flight2, flight3, flight5]
     assert trip.get_flights() == result_flights_list
@@ -185,18 +188,19 @@ def test_remove_destination_calc_price():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
-    trip.remove_destination(flight4, hotel4, car4)
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
+    trip.remove_destination(flight4)
     trip.calc_price()
 
-    result_price = 335
+    result_price = 335 * 1.16
+    result_price = round(result_price, 2)
     assert trip.price == result_price
 
 
@@ -220,14 +224,14 @@ def test_confirm_pay():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
     payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
     user = User(1, 'test@gmail.com', 111111111, payment_data)
@@ -257,14 +261,14 @@ class testPayment(unittest.TestCase):
         car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
         destination_list = [
-            {'flight': flight1, 'hotel': hotel1, 'car': car1},
-            {'flight': flight2, 'hotel': hotel2, 'car': car2},
-            {'flight': flight3, 'hotel': hotel3, 'car': car3},
-            {'flight': flight4, 'hotel': hotel4, 'car': car4},
-            {'flight': flight5, 'hotel': None, 'car': None}
+            {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+            {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+            {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+            {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+            {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
         ]
 
-        trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+        trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
@@ -294,14 +298,14 @@ def test_confirm_flight():
     car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
     destination_list = [
-        {'flight': flight1, 'hotel': hotel1, 'car': car1},
-        {'flight': flight2, 'hotel': hotel2, 'car': car2},
-        {'flight': flight3, 'hotel': hotel3, 'car': car3},
-        {'flight': flight4, 'hotel': hotel4, 'car': car4},
-        {'flight': flight5, 'hotel': None, 'car': None}
+        {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+        {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+        {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+        {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+        {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
     ]
 
-    trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+    trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
     Confirm = trip.Confirmar_Vol(trip.get_flights())
     Result = True
@@ -330,14 +334,14 @@ class testReserveFlights(unittest.TestCase):
         car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
         destination_list = [
-            {'flight': flight1, 'hotel': hotel1, 'car': car1},
-            {'flight': flight2, 'hotel': hotel2, 'car': car2},
-            {'flight': flight3, 'hotel': hotel3, 'car': car3},
-            {'flight': flight4, 'hotel': hotel4, 'car': car4},
-            {'flight': flight5, 'hotel': None, 'car': None}
+            {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+            {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+            {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+            {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+            {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
         ]
 
-        trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+        trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
         self.assertTrue(trip.reserve_flights(user))

@@ -8,30 +8,28 @@ class Trip:
 
     # num_passengers = Número de pasajeros
     # origin = Orígen
-    # destination = Destino
+    # destination_list = Lista de destinos
     # start_date = Fecha de salida
-    # finish_date = Fecha de llegada
     # price = Precio
-    def __init__(self, num_passengers, origin, destination_list, start_date, finish_date):
+    def __init__(self, num_passengers, origin, destination_list, start_date):
         self.num_passengers = num_passengers
         self.origin = origin
         self.destination_list = destination_list
         self.start_date = start_date
-        self.finish_date = finish_date
         self.price = 0
-        self.
-    def add_destination(self, flight: Flights, hotel: Hotels, car: Cars):
+
+    def add_destination(self, flight: Flights, hotel: Hotels, car: Cars, days):
         if flight not in self.get_flights():
             self.destination_list.insert((len(self.destination_list) - 1),
-                                         ({'flight': flight, 'hotel': hotel, 'car': car}))
+                                         ({'flight': flight, 'hotel': hotel, 'car': car, 'days': days}))
         else:
             print('Error: El destino ya ha sido seleccionado anteriormente.')
 
-    def remove_destination(self, flight: Flights, hotel: Hotels, car: Cars):
-        if flight in self.get_flights():
-            destination_to_remove = next((destination for destination in self.destination_list if destination['flight'] == flight), None)
-            self.destination_list.remove(destination_to_remove)
-        else:
+    def remove_destination(self, flight: Flights):
+        print(self.get_destination_index(flight))
+        try:
+            del self.destination_list[self.get_destination_index(flight)]
+        except ValueError:
             print('Error: El destino no existe en la lista de destinaciones.')
 
     def get_destination_index(self, flight: Flights):
@@ -53,18 +51,39 @@ class Trip:
         return [destination['car'] for destination in self.destination_list]
 
     def calc_price(self):
-        self.price = 0
-        for flight in self.get_flights():
-            if flight is not None:
-                self.price += flight.price
+        result = {'destination': [],
+                  'destination_total': [],
+                  'trip_without_iva': 0,
+                  'iva_percentage': 0.16,
+                  'iva': 0,
+                  'trip_with_iva': 0
+                  }
 
-        for hotel in self.get_hotels():
-            if hotel is not None:
-                self.price += hotel.price
+        for index, destination in enumerate(self.destination_list):
+            value_to_insert = {'flight_total': destination['flight'].price,
+                               'flight_person': round(destination['flight'].price / self.num_passengers, 2),
+                               'hotel_total': 0,
+                               'hotel_day_person': 0,
+                               'car_total': 0,
+                               'car_day': 0}
+            if destination['hotel'] is not None:
+                value_to_insert['hotel_total'] = destination['hotel'].price
+                value_to_insert['hotel_day_person'] = round(destination['hotel'].price / (self.num_passengers * destination['days']), 2)
 
-        for car in self.get_cars():
-            if car is not None:
-                self.price += car.price
+            if destination['car'] is not None:
+                value_to_insert['car_total'] = destination['car'].price
+                value_to_insert['car_day'] = round(destination['car'].price / destination['days'], 2)
+
+            result['destination'].append(value_to_insert)
+            result['destination_total'].append(value_to_insert['flight_total'] + value_to_insert['hotel_total'] + value_to_insert['car_total'])
+
+        result['trip_without_iva'] = sum(result['destination_total'])
+        result['iva'] = result['trip_without_iva'] * result['iva_percentage']
+        result['trip_with_iva'] = result['trip_without_iva'] + result['iva']
+
+        self.price = round(result['trip_with_iva'], 2)
+
+        return result
 
     def Confirmar_Vol(self, flight: Flights):
         Confirm = 0
@@ -187,7 +206,7 @@ class Trip:
 
     def add_car(self, n_dest, car: Cars):
         if car is not None and self.destination_list[n_dest]['car'] == None:
-            self.destination_list[n_dest]['car']=car
+            self.destination_list[n_dest]['car'] = car
         else:
             print('Este destino ya tiene un coche asignado')
 

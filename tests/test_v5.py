@@ -1,6 +1,7 @@
 import pytest
 import unittest
 from unittest import mock
+from datetime import date
 from src.User import User
 from src.PaymentData import PaymentData
 from src.Trip import Trip
@@ -28,7 +29,6 @@ def test_modify_user_data(user_email, user_phone, user_payment_data, result):
     assert user.set_data(user_email, user_phone, user_payment_data) == result
 
 
-# mock test, falta que este dentro de una clase, ojo
 class TestRetryHotels(unittest.TestCase):
     @mock.patch('src.Trip.Hotels.Booking')
     def test_retry_reserve_hotels(self, mock_booking):
@@ -51,23 +51,24 @@ class TestRetryHotels(unittest.TestCase):
         car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
         destination_list = [
-            {'flight': flight1, 'hotel': hotel1, 'car': car1},
-            {'flight': flight2, 'hotel': hotel2, 'car': car2},
-            {'flight': flight3, 'hotel': hotel3, 'car': car3},
-            {'flight': flight4, 'hotel': hotel4, 'car': car4},
-            {'flight': flight5, 'hotel': None, 'car': None}
+            {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+            {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+            {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+            {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+            {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
         ]
 
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
 
-        trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+        trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
         mock_booking.return_value.confirm_reserve.return_value = False
         self.assertFalse(trip.reserve_hotels(user))
 
         mock_booking.return_value.confirm_reserve.return_value = True
         self.assertTrue(trip.reserve_hotels(user))
+
 
 class TestRetryCars(unittest.TestCase):
     @mock.patch('src.Trip.Cars.Rentalcars')
@@ -91,17 +92,17 @@ class TestRetryCars(unittest.TestCase):
         car4 = Cars(4, 'Mazda', 'Airport', 2, 25)
 
         destination_list = [
-            {'flight': flight1, 'hotel': hotel1, 'car': car1},
-            {'flight': flight2, 'hotel': hotel2, 'car': car2},
-            {'flight': flight3, 'hotel': hotel3, 'car': car3},
-            {'flight': flight4, 'hotel': hotel4, 'car': car4},
-            {'flight': flight5, 'hotel': None, 'car': None}
+            {'flight': flight1, 'hotel': hotel1, 'car': car1, 'days': 3},
+            {'flight': flight2, 'hotel': hotel2, 'car': car2, 'days': 2},
+            {'flight': flight3, 'hotel': hotel3, 'car': car3, 'days': 3},
+            {'flight': flight4, 'hotel': hotel4, 'car': car4, 'days': 2},
+            {'flight': flight5, 'hotel': None, 'car': None, 'days': 0}
         ]
 
         payment_data = PaymentData('VISA', 'Test', '4940190000370787', 1111, 0)
         user = User(1, 'test@gmail.com', 111111111, payment_data)
 
-        trip = Trip(num_passengers, 'BCN', destination_list, '01/05/2020', '10/05/2020')
+        trip = Trip(num_passengers, 'BCN', destination_list, date(2020, 5, 1))
 
         mock_rentalcars.return_value.confirm_reserve.return_value = False
         self.assertFalse(trip.reserve_cars(user))
